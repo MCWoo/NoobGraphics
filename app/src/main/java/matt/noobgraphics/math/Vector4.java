@@ -78,6 +78,7 @@ public class Vector4 {
 
     /**
      * Normalize, i.e. make length = 1
+     * Done in place.
      */
     public void normalize() {
         float length = length();
@@ -90,7 +91,8 @@ public class Vector4 {
     }
 
     /**
-     * Dehomogenize, i.e. make w coordinate = 1
+     * Dehomogenize, i.e. make w coordinate = 1.
+     * Done in place.
      */
     public void dehomogenize() {
         if (v[3] != 0) {
@@ -122,16 +124,12 @@ public class Vector4 {
     /**
      * @return the magnitude of the vector
      */
-    public float length() {
-        return (float) Math.sqrt(this.dot(this));
-    }
+    public float length() { return (float) Math.sqrt(this.dot(this)); }
 
     /**
      * @return the magnitude of the vector
      */
-    public float magnitude() {
-        return length();
-    }
+    public float magnitude() { return length(); }
 
     /**
      * @return the number of components in the vector, i.e. the dimension
@@ -148,6 +146,12 @@ public class Vector4 {
             return 0;
         return v[i];
     }
+
+    /**
+     * Access the components array
+     * @return array of components
+     */
+    public float[] V() { return v; }
 
     /**
      * Setter
@@ -167,4 +171,16 @@ public class Vector4 {
     public float y() { return v[1]; }
     public float z() { return v[2]; }
     public float w() { return v[3]; }
+
+    public boolean equals(Vector4 other) {
+        return (v[0] == other.v[0]) && (v[1] == other.v[1]) && (v[2] == other.v[2]) && (v[3] == other.v[3]);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Vector4) {
+            return this.equals((Vector4) o);
+        }
+        return false;
+    }
 }
