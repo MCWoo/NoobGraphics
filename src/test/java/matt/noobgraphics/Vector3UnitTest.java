@@ -47,9 +47,9 @@ public class Vector3UnitTest {
     public void testSet() {
         Vector3 u = new Vector3(1,2,3);
         Vector3 v = new Vector3();
-        v.setV(0,1);
-        v.setV(1,2);
-        v.setV(2,3);
+        v.set(0,1);
+        v.set(1,2);
+        v.set(2,3);
         assertEquals(u,v);
     }
 
