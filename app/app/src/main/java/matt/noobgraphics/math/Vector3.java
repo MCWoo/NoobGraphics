@@ -7,7 +7,8 @@ package matt.noobgraphics.math;
 public class Vector3 {
     public final static int SIZE = 3;
 
-    public final float[] v = new float[3];
+    private float[] v = new float[3];
+
 
     /**
      * Default constructor
@@ -20,42 +21,6 @@ public class Vector3 {
         v[0] = x;
         v[1] = y;
         v[2] = z;
-    }
-
-    /**
-     * Addition. Returns a new Vector3
-     * @param rhs the right hand vector to add
-     * @return resultant vector
-     */
-    public Vector3 plus(Vector3 rhs) {
-        return new Vector3(v[0]+rhs.v[0], v[1]+rhs.v[1], v[2]+rhs.v[2]);
-    }
-
-    /**
-     * Subtraction. Returns a new Vector3
-     * @param rhs the right hand vector to subtract
-     * @return resultant vector
-     */
-    public Vector3 minus(Vector3 rhs) {
-        return new Vector3(v[0]-rhs.v[0], v[1]-rhs.v[1], v[2]-rhs.v[2]);
-    }
-
-    /**
-     * Component-wise multiplication. Returns a new Vector3
-     * @param rhs the right hand vector to multiply by
-     * @return resultant vector
-     */
-    public Vector3 times(Vector3 rhs) {
-        return new Vector3(v[0]*rhs.v[0], v[1]*rhs.v[1], v[2]*rhs.v[2]);
-    }
-
-    /**
-     * Component-wise division. Returns a new Vector3
-     * @param rhs the right hand vector to divide by
-     * @return resultant vector
-     */
-    public Vector3 divideBy(Vector3 rhs) {
-        return new Vector3(v[0]/rhs.v[0], v[1]/rhs.v[1], v[2]/rhs.v[2]);
     }
 
     /**
@@ -113,13 +78,6 @@ public class Vector3 {
     }
 
     /**
-     * In place negation
-     */
-    public void negate() {
-        scale(-1);
-    }
-
-    /**
      * Scale the vector
      * @param sx scale in the x dimension
      * @param sy scale in the y dimension
@@ -168,18 +126,12 @@ public class Vector3 {
     }
 
     /**
-     * Access the components array
-     * @return array of components
-     */
-    public float[] V() { return v; }
-
-    /**
      * Setter
      * @param i index into the vector
      * @param val value to set to
      * @return true if succeeds
      */
-    public boolean set(int i, float val) {
+    public boolean setV(int i, float val) {
         if (i < 0 || i > SIZE)
             return false;
         v[i] = val;
@@ -189,16 +141,4 @@ public class Vector3 {
     public float x() { return v[0]; }
     public float y() { return v[1]; }
     public float z() { return v[2]; }
-
-    public boolean equals(Vector3 other) {
-        return (v[0] == other.v[0]) && (v[1] == other.v[1]) && (v[2] == other.v[2]);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof Vector3) {
-            return this.equals((Vector3) o);
-        }
-        return false;
-    }
 }

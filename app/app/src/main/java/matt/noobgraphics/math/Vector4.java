@@ -5,9 +5,8 @@ package matt.noobgraphics.math;
  * Created by Matth on 7/13/2016.
  */
 public class Vector4 {
+    private float[] v = new float[4];
     public static int SIZE = 4;
-
-    public final float[] v = new float[4];
 
     /**
      * Default constructor. Sets everything to 0
@@ -69,42 +68,6 @@ public class Vector4 {
     }
 
     /**
-     * Addition. Returns a new Vector3
-     * @param rhs the right hand vector to add
-     * @return resultant vector
-     */
-    public Vector4 plus(Vector4 rhs) {
-        return new Vector4(v[0]+rhs.v[0], v[1]+rhs.v[1], v[2]+rhs.v[2], v[3]+rhs.v[3]);
-    }
-
-    /**
-     * Subtraction. Returns a new Vector3
-     * @param rhs the right hand vector to subtract
-     * @return resultant vector
-     */
-    public Vector4 minus(Vector4 rhs) {
-        return new Vector4(v[0]-rhs.v[0], v[1]-rhs.v[1], v[2]-rhs.v[2], v[3]-rhs.v[3]);
-    }
-
-    /**
-     * Component-wise multiplication. Returns a new Vector3
-     * @param rhs the right hand vector to multiply by
-     * @return resultant vector
-     */
-    public Vector4 times(Vector4 rhs) {
-        return new Vector4(v[0]*rhs.v[0], v[1]*rhs.v[1], v[2]*rhs.v[2], v[3]*rhs.v[3]);
-    }
-
-    /**
-     * Component-wise division. Returns a new Vector3
-     * @param rhs the right hand vector to divide by
-     * @return resultant vector
-     */
-    public Vector4 divideBy(Vector4 rhs) {
-        return new Vector4(v[0]/rhs.v[0], v[1]/rhs.v[1], v[2]/rhs.v[2], v[3]/rhs.v[3]);
-    }
-
-    /**
      * Dot product
      * @param rhs the vector to calculate the dot product with
      * @return the dot product
@@ -115,7 +78,6 @@ public class Vector4 {
 
     /**
      * Normalize, i.e. make length = 1
-     * Done in place.
      */
     public void normalize() {
         float length = length();
@@ -128,8 +90,7 @@ public class Vector4 {
     }
 
     /**
-     * Dehomogenize, i.e. make w coordinate = 1.
-     * Done in place.
+     * Dehomogenize, i.e. make w coordinate = 1
      */
     public void dehomogenize() {
         if (v[3] != 0) {
@@ -161,12 +122,16 @@ public class Vector4 {
     /**
      * @return the magnitude of the vector
      */
-    public float length() { return (float) Math.sqrt(this.dot(this)); }
+    public float length() {
+        return (float) Math.sqrt(this.dot(this));
+    }
 
     /**
      * @return the magnitude of the vector
      */
-    public float magnitude() { return length(); }
+    public float magnitude() {
+        return length();
+    }
 
     /**
      * @return the number of components in the vector, i.e. the dimension
@@ -185,18 +150,12 @@ public class Vector4 {
     }
 
     /**
-     * Access the components array
-     * @return array of components
-     */
-    public float[] V() { return v; }
-
-    /**
      * Setter
      * @param i index into the vector
      * @param val value to set to
      * @return true if succeeds
      */
-    public boolean set(int i, float val) {
+    public boolean setV(int i, float val) {
         if (i < 0 || i > SIZE)
             return false;
         v[i] = val;
@@ -208,16 +167,4 @@ public class Vector4 {
     public float y() { return v[1]; }
     public float z() { return v[2]; }
     public float w() { return v[3]; }
-
-    public boolean equals(Vector4 other) {
-        return (v[0] == other.v[0]) && (v[1] == other.v[1]) && (v[2] == other.v[2]) && (v[3] == other.v[3]);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof Vector4) {
-            return this.equals((Vector4) o);
-        }
-        return false;
-    }
 }
