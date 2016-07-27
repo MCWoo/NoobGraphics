@@ -264,4 +264,20 @@ public class Matrix3 {
         m[offset+1] = vec.v[1];
         m[offset+2] = vec.v[2];
     }
+
+    /**
+     * Equality check
+     * @param rhs the object to test equality against
+     * @return true if all entries in the two matrices are equal
+     */
+    public boolean equals(Object rhs) {
+        if (!(rhs instanceof Matrix3)) return false;
+
+        Matrix3 m2 = (Matrix3) rhs;
+        for (int i = 0; i < MATRIX_SIZE; i++)
+            if (m[i] != m2.m[i])
+                return false;
+
+        return true;
+    }
 }

@@ -98,8 +98,8 @@ public class Matrix4 {
      */
     public Matrix4(Matrix3 mat3) {
         set(0,0,mat3.M(0,0));   set(1,0,mat3.M(1,0));   set(2,0,mat3.M(2,0));
-        set(0,1,mat3.M(0,0));   set(1,1,mat3.M(1,1));   set(2,1,mat3.M(2,1));
-        set(0,2,mat3.M(0,0));   set(1,2,mat3.M(1,2));   set(2,2,mat3.M(2,2));
+        set(0,1,mat3.M(0,1));   set(1,1,mat3.M(1,1));   set(2,1,mat3.M(2,1));
+        set(0,2,mat3.M(0,2));   set(1,2,mat3.M(1,2));   set(2,2,mat3.M(2,2));
         m[15] = 1.0f;
     }
 
@@ -110,6 +110,7 @@ public class Matrix4 {
      */
     public Matrix4 multiply(Matrix4 rhs) {
         Matrix4 mat = new Matrix4();
+
         // Column 1
         mat.m[0] = m[0]*rhs.m[0] + m[4]*rhs.m[1] + m[8]*rhs.m[2]  + m[12]*rhs.m[3];
         mat.m[1] = m[1]*rhs.m[0] + m[5]*rhs.m[1] + m[9]*rhs.m[2]  + m[13]*rhs.m[3];
@@ -167,7 +168,23 @@ public class Matrix4 {
      * Returns a new Matrix
      * @return the fast inverse of a model/camera matrix
      */
-    public Matrix4 fastInverse() { return new Matrix4(); }
+    public Matrix4 fastInverse() {
+        // Transpose rotation portion
+        Matrix4 rotInv = new Matrix4();
+        rotInv.m[0] = m[0];     rotInv.m[4] = m[1];     rotInv.m[8] = m[2];
+        rotInv.m[1] = m[4];     rotInv.m[5] = m[5];     rotInv.m[9] = m[6];
+        rotInv.m[2] = m[8];     rotInv.m[6] = m[9];     rotInv.m[10] = m[10];
+        rotInv.m[15] = 1.0f;
+
+        // Negate translation portion
+        Matrix4 transInv = Matrix4.identity();
+        transInv.m[12] = -m[12];
+        transInv.m[13] = -m[13];
+        transInv.m[14] = -m[14];
+
+
+        return rotInv.multiply(transInv);
+    }
 
     /**
      * Returns a new identity matrix
@@ -369,5 +386,21 @@ public class Matrix4 {
         m[offset+1] = vec.v[1];
         m[offset+2] = vec.v[2];
         m[offset+3] = vec.v[3];
+    }
+
+    /**
+     * Equality check
+     * @param rhs the object to test equality against
+     * @return true if all entries in the two matrices are equal
+     */
+    public boolean equals(Object rhs) {
+        if (!(rhs instanceof Matrix4)) return false;
+
+        Matrix4 m2 = (Matrix4) rhs;
+        for (int i = 0; i < MATRIX_SIZE; i++)
+            if (m[i] != m2.m[i])
+                return false;
+
+        return true;
     }
 }
