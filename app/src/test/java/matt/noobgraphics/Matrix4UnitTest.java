@@ -189,25 +189,25 @@ public class Matrix4UnitTest {
 
         Matrix4 m = new Matrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
 
-        assertEquals(m.m[0], m.M(0,0), DELTA);
-        assertEquals(m.m[1], m.M(0,1), DELTA);
-        assertEquals(m.m[2], m.M(0,2), DELTA);
-        assertEquals(m.m[3], m.M(0,3), DELTA);
+        assertEquals(m00, m.M(0,0), DELTA);
+        assertEquals(m01, m.M(0,1), DELTA);
+        assertEquals(m02, m.M(0,2), DELTA);
+        assertEquals(m03, m.M(0,3), DELTA);
 
-        assertEquals(m.m[4], m.M(1,0), DELTA);
-        assertEquals(m.m[5], m.M(1,1), DELTA);
-        assertEquals(m.m[6], m.M(1,2), DELTA);
-        assertEquals(m.m[7], m.M(1,3), DELTA);
+        assertEquals(m10, m.M(1,0), DELTA);
+        assertEquals(m11, m.M(1,1), DELTA);
+        assertEquals(m12, m.M(1,2), DELTA);
+        assertEquals(m13, m.M(1,3), DELTA);
 
-        assertEquals(m.m[8],  m.M(2,0), DELTA);
-        assertEquals(m.m[9],  m.M(2,1), DELTA);
-        assertEquals(m.m[10], m.M(2,2), DELTA);
-        assertEquals(m.m[11], m.M(2,3), DELTA);
+        assertEquals(m20, m.M(2,0), DELTA);
+        assertEquals(m21, m.M(2,1), DELTA);
+        assertEquals(m22, m.M(2,2), DELTA);
+        assertEquals(m23, m.M(2,3), DELTA);
 
-        assertEquals(m.m[12], m.M(3,0), DELTA);
-        assertEquals(m.m[13], m.M(3,1), DELTA);
-        assertEquals(m.m[14], m.M(3,2), DELTA);
-        assertEquals(m.m[15], m.M(3,3), DELTA);
+        assertEquals(m30, m.M(3,0), DELTA);
+        assertEquals(m31, m.M(3,1), DELTA);
+        assertEquals(m32, m.M(3,2), DELTA);
+        assertEquals(m33, m.M(3,3), DELTA);
     }
 
     @Test
@@ -224,25 +224,25 @@ public class Matrix4UnitTest {
         m.set(0,2, m02);   m.set(1,2, m12);   m.set(2,2, m22);   m.set(3,2, m32);
         m.set(0,3, m03);   m.set(1,3, m13);   m.set(2,3, m23);   m.set(3,3, m33);
 
-        assertEquals(m.m[0], m00, DELTA);
-        assertEquals(m.m[1], m01, DELTA);
-        assertEquals(m.m[2], m02, DELTA);
-        assertEquals(m.m[3], m03, DELTA);
+        assertEquals(m00, m.m[0], DELTA);
+        assertEquals(m01, m.m[1], DELTA);
+        assertEquals(m02, m.m[2], DELTA);
+        assertEquals(m03, m.m[3], DELTA);
 
-        assertEquals(m.m[4], m10, DELTA);
-        assertEquals(m.m[5], m11, DELTA);
-        assertEquals(m.m[6], m12, DELTA);
-        assertEquals(m.m[7], m13, DELTA);
+        assertEquals(m10, m.m[4], DELTA);
+        assertEquals(m11, m.m[5], DELTA);
+        assertEquals(m12, m.m[6], DELTA);
+        assertEquals(m13, m.m[7], DELTA);
 
-        assertEquals(m.m[8],  m20, DELTA);
-        assertEquals(m.m[9],  m21, DELTA);
-        assertEquals(m.m[10], m22, DELTA);
-        assertEquals(m.m[11], m23, DELTA);
+        assertEquals(m20, m.m[8],  DELTA);
+        assertEquals(m21, m.m[9],  DELTA);
+        assertEquals(m22, m.m[10], DELTA);
+        assertEquals(m23, m.m[11], DELTA);
 
-        assertEquals(m.m[12], m30, DELTA);
-        assertEquals(m.m[13], m31, DELTA);
-        assertEquals(m.m[14], m32, DELTA);
-        assertEquals(m.m[15], m33, DELTA);
+        assertEquals(m30, m.m[12], DELTA);
+        assertEquals(m31, m.m[13], DELTA);
+        assertEquals(m32, m.m[14], DELTA);
+        assertEquals(m33, m.m[15], DELTA);
     }
 
     @Test

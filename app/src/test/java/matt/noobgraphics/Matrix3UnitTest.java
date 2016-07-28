@@ -45,19 +45,19 @@ public class Matrix3UnitTest {
         float m01 = 2.0f;   float m11 = 5.0f;   float m21 = 8.0f;
         float m02 = 3.0f;   float m12 = 6.0f;   float m22 = 9.0f;
 
-        Matrix3 mat = new Matrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+        Matrix3 m = new Matrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 
-        assertEquals(m00, mat.m[0], DELTA);
-        assertEquals(m01, mat.m[1], DELTA);
-        assertEquals(m02, mat.m[2], DELTA);
+        assertEquals(m00, m.m[0], DELTA);
+        assertEquals(m01, m.m[1], DELTA);
+        assertEquals(m02, m.m[2], DELTA);
 
-        assertEquals(m10, mat.m[3], DELTA);
-        assertEquals(m11, mat.m[4], DELTA);
-        assertEquals(m12, mat.m[5], DELTA);
+        assertEquals(m10, m.m[3], DELTA);
+        assertEquals(m11, m.m[4], DELTA);
+        assertEquals(m12, m.m[5], DELTA);
 
-        assertEquals(m20, mat.m[6], DELTA);
-        assertEquals(m21, mat.m[7], DELTA);
-        assertEquals(m22, mat.m[8], DELTA);
+        assertEquals(m20, m.m[6], DELTA);
+        assertEquals(m21, m.m[7], DELTA);
+        assertEquals(m22, m.m[8], DELTA);
     }
 
     @Test
@@ -118,5 +118,51 @@ public class Matrix3UnitTest {
         mat2.m[0] = 0.0f;
 
         assertNotEquals(mat, mat2);
+    }
+
+    @Test
+    public void testGetter() {
+        float m00 = 1.0f;   float m10 = 4.0f;   float m20 = 7.0f;
+        float m01 = 2.0f;   float m11 = 5.0f;   float m21 = 8.0f;
+        float m02 = 3.0f;   float m12 = 6.0f;   float m22 = 9.0f;
+
+        Matrix3 m = new Matrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+
+        assertEquals(m00, m.M(0,0), DELTA);
+        assertEquals(m01, m.M(0,1), DELTA);
+        assertEquals(m02, m.M(0,2), DELTA);
+
+        assertEquals(m10, m.M(1,0), DELTA);
+        assertEquals(m11, m.M(1,1), DELTA);
+        assertEquals(m12, m.M(1,2), DELTA);
+
+        assertEquals(m20, m.M(2,0), DELTA);
+        assertEquals(m21, m.M(2,1), DELTA);
+        assertEquals(m22, m.M(2,2), DELTA);
+    }
+
+    @Test
+    public void testSetter() {
+        float m00 = 1.0f;   float m10 = 4.0f;   float m20 = 7.0f;
+        float m01 = 2.0f;   float m11 = 5.0f;   float m21 = 8.0f;
+        float m02 = 3.0f;   float m12 = 6.0f;   float m22 = 9.0f;
+
+        Matrix3 m = new Matrix3();
+
+        m.set(0,0, m00);   m.set(1,0, m10);   m.set(2,0, m20);
+        m.set(0,1, m01);   m.set(1,1, m11);   m.set(2,1, m21);
+        m.set(0,2, m02);   m.set(1,2, m12);   m.set(2,2, m22);
+
+        assertEquals(m00, m.m[0], DELTA);
+        assertEquals(m01, m.m[1], DELTA);
+        assertEquals(m02, m.m[2], DELTA);
+
+        assertEquals(m10, m.m[3], DELTA);
+        assertEquals(m11, m.m[4], DELTA);
+        assertEquals(m12, m.m[5], DELTA);
+
+        assertEquals(m20, m.m[6], DELTA);
+        assertEquals(m21, m.m[7], DELTA);
+        assertEquals(m22, m.m[8], DELTA);
     }
 }
