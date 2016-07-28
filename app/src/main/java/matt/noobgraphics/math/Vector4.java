@@ -215,9 +215,12 @@ public class Vector4 {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Vector4) {
-            return this.equals((Vector4) o);
-        }
-        return false;
+        if (!(o instanceof Vector4)) return false;
+
+        Vector4 rhs = (Vector4) o;
+        for (int i = 0; i < SIZE; i++)
+            if (v[i] != rhs.v[i]) return false;
+
+        return true;
     }
 }

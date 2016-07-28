@@ -267,8 +267,8 @@ public class Matrix4 {
      */
     public static Matrix4 rotateX(float rad) {
         Matrix4 mat = Matrix4.identity();
-        mat.set(1,1,(float) Math.cos(rad));     mat.set(2,1,(float) Math.sin(rad));
-        mat.set(1,2,(float) -Math.sin(rad));    mat.set(2,2,(float) Math.cos(rad));
+        mat.set(1,1,(float) Math.cos(rad));    mat.set(2,1,(float) -Math.sin(rad));
+        mat.set(1,2,(float) Math.sin(rad));    mat.set(2,2,(float) Math.cos(rad));
         return mat;
     }
     /**
@@ -278,8 +278,8 @@ public class Matrix4 {
      */
     public static Matrix4 rotateY(float rad) {
         Matrix4 mat = Matrix4.identity();
-        mat.set(0,0,(float) Math.cos(rad));     mat.set(2,0,(float) -Math.sin(rad));
-        mat.set(0,2,(float) Math.sin(rad));     mat.set(2,2,(float) Math.cos(rad));
+        mat.set(0,0,(float) Math.cos(rad));     mat.set(2,0,(float) Math.sin(rad));
+        mat.set(0,2,(float) -Math.sin(rad));    mat.set(2,2,(float) Math.cos(rad));
         return mat;
     }
     /**
@@ -289,8 +289,8 @@ public class Matrix4 {
      */
     public static Matrix4 rotateZ(float rad) {
         Matrix4 mat = Matrix4.identity();
-        mat.set(0,0,(float) Math.cos(rad));     mat.set(1,0,(float) Math.sin(rad));
-        mat.set(0,1,(float) -Math.sin(rad));    mat.set(1,1,(float) Math.cos(rad));
+        mat.set(0,0,(float) Math.cos(rad));     mat.set(1,0,(float) -Math.sin(rad));
+        mat.set(0,1,(float) Math.sin(rad));     mat.set(1,1,(float) Math.cos(rad));
         return mat;
     }
 

@@ -48,7 +48,6 @@ public class Matrix3 {
      * @param x the x axis vector
      * @param y the y axis vector
      * @param z the z axis vector
-     * @param e the translation
      */
     public Matrix3(Vector3 x, Vector3 y, Vector3 z) {
         m[0] = x.x();   m[3] = y.x();   m[6]  = z.x();
@@ -84,9 +83,9 @@ public class Matrix3 {
     public Matrix3 multiply(Matrix3 rhs) {
         Matrix3 mat = new Matrix3();
         // Column 1
-        mat.m[0] = m[0]*rhs.m[0] + m[3]*rhs.m[3] + m[6]*rhs.m[6];
-        mat.m[1] = m[1]*rhs.m[0] + m[4]*rhs.m[3] + m[7]*rhs.m[6];
-        mat.m[2] = m[2]*rhs.m[0] + m[5]*rhs.m[3] + m[8]*rhs.m[6];
+        mat.m[0] = m[0]*rhs.m[0] + m[3]*rhs.m[1] + m[6]*rhs.m[2];
+        mat.m[1] = m[1]*rhs.m[0] + m[4]*rhs.m[1] + m[7]*rhs.m[2];
+        mat.m[2] = m[2]*rhs.m[0] + m[5]*rhs.m[1] + m[8]*rhs.m[2];
 
         // Column 2
         mat.m[3] = m[0]*rhs.m[3] + m[3]*rhs.m[4] + m[6]*rhs.m[5];
@@ -162,8 +161,8 @@ public class Matrix3 {
      */
     public static Matrix3 rotateX(float rad) {
         Matrix3 mat = Matrix3.identity();
-        mat.set(1,1,(float) Math.cos(rad));     mat.set(2,1,(float) Math.sin(rad));
-        mat.set(1,2,(float) -Math.sin(rad));    mat.set(2,2,(float) Math.cos(rad));
+        mat.set(1,1,(float) Math.cos(rad));     mat.set(2,1,(float) -Math.sin(rad));
+        mat.set(1,2,(float) Math.sin(rad));     mat.set(2,2,(float) Math.cos(rad));
         return mat;
     }
     /**
@@ -173,8 +172,8 @@ public class Matrix3 {
      */
     public static Matrix3 rotateY(float rad) {
         Matrix3 mat = Matrix3.identity();
-        mat.set(0,0,(float) Math.cos(rad));     mat.set(2,0,(float) -Math.sin(rad));
-        mat.set(0,2,(float) Math.sin(rad));     mat.set(2,2,(float) Math.cos(rad));
+        mat.set(0,0,(float) Math.cos(rad));     mat.set(2,0,(float) Math.sin(rad));
+        mat.set(0,2,(float) -Math.sin(rad));    mat.set(2,2,(float) Math.cos(rad));
         return mat;
     }
     /**
@@ -184,8 +183,8 @@ public class Matrix3 {
      */
     public static Matrix3 rotateZ(float rad) {
         Matrix3 mat = Matrix3.identity();
-        mat.set(0,0,(float) Math.cos(rad));     mat.set(1,0,(float) Math.sin(rad));
-        mat.set(0,1,(float) -Math.sin(rad));    mat.set(1,1,(float) Math.cos(rad));
+        mat.set(0,0,(float) Math.cos(rad));     mat.set(1,0,(float) -Math.sin(rad));
+        mat.set(0,1,(float) Math.sin(rad));     mat.set(1,1,(float) Math.cos(rad));
         return mat;
     }
 

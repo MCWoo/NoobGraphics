@@ -196,9 +196,12 @@ public class Vector3 {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Vector3) {
-            return this.equals((Vector3) o);
-        }
-        return false;
+        if (!(o instanceof Vector3)) return false;
+
+        Vector3 rhs = (Vector3) o;
+        for (int i = 0; i < SIZE; i++)
+            if (v[i] != rhs.v[i]) return false;
+
+        return true;
     }
 }
