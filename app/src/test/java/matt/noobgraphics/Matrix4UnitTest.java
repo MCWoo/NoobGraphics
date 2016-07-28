@@ -288,20 +288,12 @@ public class Matrix4UnitTest {
         Matrix4 m2m = m2.multiply(m);
 
         // Pre-calculated answers
-        Matrix4 mSquaredAnswer = new Matrix4(90.0f, 100.0f, 110.0f, 120.0f,
-                                       202.0f, 228.0f, 254.0f, 280.0f,
-                                       314.0f, 356.0f, 398.0f, 440.0f,
-                                       426.0f, 484.0f, 542.0f, 600.0f);
-
-        Matrix4 mm2Answer = new Matrix4(426.0f, 484.0f, 542.0f, 600.0f,
-                                        90.0f, 100.0f, 110.0f, 120.0f,
-                                        202.0f, 228.0f, 254.0f, 280.0f,
-                                        314.0f, 356.0f, 398.0f, 440.0f);
-
-        Matrix4 m2mAnswer = new Matrix4(66.0f, 76.0f, 86.0f, 96.0f,
-                                        178.0f, 204.0f, 230.0f, 256.0f,
-                                        290.0f, 332.0f, 374.0f, 416.0f,
-                                        402.0f, 460.0f, 518.0f, 576.0f);
+        Matrix4 mSquaredAnswer = new Matrix4(90.0f, 100.0f, 110.0f, 120.0f, 202.0f, 228.0f, 254.0f, 280.0f,
+                                       314.0f, 356.0f, 398.0f, 440.0f, 426.0f, 484.0f, 542.0f, 600.0f);
+        Matrix4 mm2Answer = new Matrix4(426.0f, 484.0f, 542.0f, 600.0f, 90.0f, 100.0f, 110.0f, 120.0f,
+                                        202.0f, 228.0f, 254.0f, 280.0f, 314.0f, 356.0f, 398.0f, 440.0f);
+        Matrix4 m2mAnswer = new Matrix4(66.0f, 76.0f, 86.0f, 96.0f, 178.0f, 204.0f, 230.0f, 256.0f,
+                                        290.0f, 332.0f, 374.0f, 416.0f, 402.0f, 460.0f, 518.0f, 576.0f);
 
         assertEquals(m, rightIdentityResult);
         assertEquals(m, leftIdentityResult);
@@ -373,5 +365,74 @@ public class Matrix4UnitTest {
         assertEquals(m.M(3,1), transpose.M(1,3), DELTA);
         assertEquals(m.M(3,2), transpose.M(2,3), DELTA);
         assertEquals(m.M(3,3), transpose.M(3,3), DELTA);
+    }
+
+    @Test
+    public void testRotateX() {
+        Vector4 x = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Matrix4 rotX = Matrix4.rotateX((float) (Math.PI / 2.0));
+
+        Vector4 x2 = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y2 = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+        Vector4 z2 = new Vector4(0.0f, -1.0f, 0.0f, 1.0f);
+
+        Vector4 Tx = rotX.multiply(x);
+        Vector4 Ty = rotX.multiply(y);
+        Vector4 Tz = rotX.multiply(z);
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(x2.v[i], Tx.v[i], DELTA);
+            assertEquals(y2.v[i], Ty.v[i], DELTA);
+            assertEquals(z2.v[i], Tz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testRotateY() {
+        Vector4 x = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Matrix4 rotX = Matrix4.rotateY((float) (Math.PI / 2.0));
+
+        Vector4 x2 = new Vector4(0.0f, 0.0f, -1.0f, 1.0f);
+        Vector4 y2 = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z2 = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+
+        Vector4 Tx = rotX.multiply(x);
+        Vector4 Ty = rotX.multiply(y);
+        Vector4 Tz = rotX.multiply(z);
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(x2.v[i], Tx.v[i], DELTA);
+            assertEquals(y2.v[i], Ty.v[i], DELTA);
+            assertEquals(z2.v[i], Tz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testRotateZ() {
+        Vector4 x = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Matrix4 rotX = Matrix4.rotateZ((float) (Math.PI / 2.0));
+
+        Vector4 x2 = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 y2 = new Vector4(-1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 z2 = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Vector4 Tx = rotX.multiply(x);
+        Vector4 Ty = rotX.multiply(y);
+        Vector4 Tz = rotX.multiply(z);
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(x2.v[i], Tx.v[i], DELTA);
+            assertEquals(y2.v[i], Ty.v[i], DELTA);
+            assertEquals(z2.v[i], Tz.v[i], DELTA);
+        }
     }
 }
