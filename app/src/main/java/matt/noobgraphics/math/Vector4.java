@@ -31,6 +31,17 @@ public class Vector4 {
     }
 
     /**
+     * Constructor that simplifies the number of parameters. The first parameter is used for all
+     * x,y,z coordinates, and the second parameter for the homogenous portion
+     * @param components the value of the x,y,z components
+     * @param w the value of the w component
+     */
+    public Vector4(float components, float w) {
+        v[0] = v[1] = v[2] = components;
+        v[3] = w;
+    }
+
+    /**
      * Constructor. Deep copy
      * @param other the values to copy
      */

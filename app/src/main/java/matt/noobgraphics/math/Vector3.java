@@ -16,10 +16,48 @@ public class Vector3 {
         v[0] = v[1] = v[2] = 0.0f;
     }
 
+    /**
+     * Sets the x, y, z components accordingly
+     * @param x the x component
+     * @param y the y component
+     * @param z the z component
+     */
     public Vector3(float x, float y, float z) {
         v[0] = x;
         v[1] = y;
         v[2] = z;
+    }
+
+    /**
+     * Constructor that takes one parameter and sets all components with it
+     * @param xyz the value of the x,y,z coordinates
+     */
+    public Vector3(float xyz) {
+        v[0] = v[1] = v[2] = xyz;
+    }
+
+    /**
+     * Constructor
+     * @param other the values to copy
+     */
+    public Vector3(float[] other) {
+        if (other.length != SIZE)
+            v[0] = v[1] = v[2] = 0.0f;
+        else {
+            v[0] = other[0];
+            v[1] = other[1];
+            v[2] = other[2];
+        }
+    }
+
+    /**
+     * Copy constructor
+     * @param other the Vector4 to copy
+     */
+    public Vector3(Vector3 other) {
+        v[0] = other.v[0];
+        v[1] = other.v[1];
+        v[2] = other.v[2];
     }
 
     /**
@@ -56,30 +94,6 @@ public class Vector3 {
      */
     public Vector3 divideBy(Vector3 rhs) {
         return new Vector3(v[0]/rhs.v[0], v[1]/rhs.v[1], v[2]/rhs.v[2]);
-    }
-
-    /**
-     * Constructor
-     * @param other the values to copy
-     */
-    public Vector3(float[] other) {
-        if (other.length != SIZE)
-            v[0] = v[1] = v[2] = 0.0f;
-        else {
-            v[0] = other[0];
-            v[1] = other[1];
-            v[2] = other[2];
-        }
-    }
-
-    /**
-     * Copy constructor
-     * @param other the Vector4 to copy
-     */
-    public Vector3(Vector3 other) {
-        v[0] = other.v[0];
-        v[1] = other.v[1];
-        v[2] = other.v[2];
     }
 
     /**

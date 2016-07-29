@@ -204,9 +204,10 @@ public class Matrix4 {
      */
     public static Matrix4 scale(float sx, float sy, float sz) {
         Matrix4 mat = new Matrix4();
-        mat.m[0] = sx;
-        mat.m[5] = sy;
-        mat.m[10] = sz;
+        mat.m[0] = sx;      // (0,0)
+        mat.m[5] = sy;      // (1,1)
+        mat.m[10] = sz;     // (2,2)
+        mat.m[15] = 1.0f;   // (3,3)
         return mat;
     }
 
