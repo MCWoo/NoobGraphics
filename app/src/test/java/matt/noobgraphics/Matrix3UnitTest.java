@@ -3,13 +3,12 @@ package matt.noobgraphics;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 import matt.noobgraphics.math.Matrix3;
 import matt.noobgraphics.math.Matrix4;
 import matt.noobgraphics.math.Vector3;
+import matt.noobgraphics.math.Vector4;
 
 /**
  * Created by Matth on 7/27/2016.
@@ -255,20 +254,20 @@ public class Matrix3UnitTest {
         Vector3 y = new Vector3(0.0f, 1.0f, 0.0f);
         Vector3 z = new Vector3(0.0f, 0.0f, 1.0f);
 
-        Matrix3 rotX = Matrix3.rotateX((float) (Math.PI / 2.0));
+        Matrix3 T = Matrix3.rotateX((float) (Math.PI / 2.0));
 
-        Vector3 x2 = new Vector3(1.0f, 0.0f, 0.0f);
-        Vector3 y2 = new Vector3(0.0f, 0.0f, 1.0f);
-        Vector3 z2 = new Vector3(0.0f, -1.0f, 0.0f);
+        Vector3 TxAnswer = new Vector3(1.0f, 0.0f, 0.0f);
+        Vector3 TyAnswer = new Vector3(0.0f, 0.0f, 1.0f);
+        Vector3 TzAnswer = new Vector3(0.0f, -1.0f, 0.0f);
 
-        Vector3 Tx = rotX.multiply(x);
-        Vector3 Ty = rotX.multiply(y);
-        Vector3 Tz = rotX.multiply(z);
+        Vector3 Tx = T.multiply(x);
+        Vector3 Ty = T.multiply(y);
+        Vector3 Tz = T.multiply(z);
 
         for (int i = 0; i < Vector3.SIZE; i++) {
-            assertEquals(x2.v[i], Tx.v[i], DELTA);
-            assertEquals(y2.v[i], Ty.v[i], DELTA);
-            assertEquals(z2.v[i], Tz.v[i], DELTA);
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
         }
     }
 
@@ -278,20 +277,73 @@ public class Matrix3UnitTest {
         Vector3 y = new Vector3(0.0f, 1.0f, 0.0f);
         Vector3 z = new Vector3(0.0f, 0.0f, 1.0f);
 
-        Matrix3 rotX = Matrix3.rotateY((float) (Math.PI / 2.0));
+        Matrix3 T = Matrix3.rotateY((float) (Math.PI / 2.0));
 
-        Vector3 x2 = new Vector3(0.0f, 0.0f, -1.0f);
-        Vector3 y2 = new Vector3(0.0f, 1.0f, 0.0f);
-        Vector3 z2 = new Vector3(1.0f, 0.0f, 0.0f);
+        Vector3 TxAnswer = new Vector3(0.0f, 0.0f, -1.0f);
+        Vector3 TyAnswer = new Vector3(0.0f, 1.0f, 0.0f);
+        Vector3 TzAnswer = new Vector3(1.0f, 0.0f, 0.0f);
 
-        Vector3 Tx = rotX.multiply(x);
-        Vector3 Ty = rotX.multiply(y);
-        Vector3 Tz = rotX.multiply(z);
+        Vector3 Tx = T.multiply(x);
+        Vector3 Ty = T.multiply(y);
+        Vector3 Tz = T.multiply(z);
 
         for (int i = 0; i < Vector3.SIZE; i++) {
-            assertEquals(x2.v[i], Tx.v[i], DELTA);
-            assertEquals(y2.v[i], Ty.v[i], DELTA);
-            assertEquals(z2.v[i], Tz.v[i], DELTA);
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testRotate() {
+        Vector3 x = new Vector3(1.0f, 0.0f, 0.0f);
+        Vector3 y = new Vector3(0.0f, 1.0f, 0.0f);
+        Vector3 z = new Vector3(0.0f, 0.0f, 1.0f);
+
+        Matrix3 Tx = Matrix3.rotate(new Vector3(1.0f, 0.0f, 0.0f), (float) (Math.PI / 2.0));
+        Matrix3 Ty = Matrix3.rotate(new Vector3(0.0f, 1.0f, 0.0f), (float) (Math.PI / 2.0));
+        Matrix3 Tz = Matrix3.rotate(new Vector3(0.0f, 0.0f, 1.0f), (float) (Math.PI / 2.0));
+
+        Vector3 TxxAnswer = new Vector3(1.0f, 0.0f, 0.0f);
+        Vector3 TxyAnswer = new Vector3(0.0f, 0.0f, 1.0f);
+        Vector3 TxzAnswer = new Vector3(0.0f, -1.0f, 0.0f);
+
+        Vector3 TyxAnswer = new Vector3(0.0f, 0.0f, -1.0f);
+        Vector3 TyyAnswer = new Vector3(0.0f, 1.0f, 0.0f);
+        Vector3 TyzAnswer = new Vector3(1.0f, 0.0f, 0.0f);
+
+        Vector3 TzxAnswer = new Vector3(0.0f, 1.0f, 0.0f);
+        Vector3 TzyAnswer = new Vector3(-1.0f, 0.0f, 0.0f);
+        Vector3 TzzAnswer = new Vector3(0.0f, 0.0f, 1.0f);
+
+        Vector3 Txx = Tx.multiply(x);
+        Vector3 Txy = Tx.multiply(y);
+        Vector3 Txz = Tx.multiply(z);
+
+        Vector3 Tyx = Ty.multiply(x);
+        Vector3 Tyy = Ty.multiply(y);
+        Vector3 Tyz = Ty.multiply(z);
+
+        Vector3 Tzx = Tz.multiply(x);
+        Vector3 Tzy = Tz.multiply(y);
+        Vector3 Tzz = Tz.multiply(z);
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(TxxAnswer.v[i], Txx.v[i], DELTA);
+            assertEquals(TxyAnswer.v[i], Txy.v[i], DELTA);
+            assertEquals(TxzAnswer.v[i], Txz.v[i], DELTA);
+        }
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(TyxAnswer.v[i], Tyx.v[i], DELTA);
+            assertEquals(TyyAnswer.v[i], Tyy.v[i], DELTA);
+            assertEquals(TyzAnswer.v[i], Tyz.v[i], DELTA);
+        }
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(TzxAnswer.v[i], Tzx.v[i], DELTA);
+            assertEquals(TzyAnswer.v[i], Tzy.v[i], DELTA);
+            assertEquals(TzzAnswer.v[i], Tzz.v[i], DELTA);
         }
     }
 
@@ -301,20 +353,20 @@ public class Matrix3UnitTest {
         Vector3 y = new Vector3(0.0f, 1.0f, 0.0f);
         Vector3 z = new Vector3(0.0f, 0.0f, 1.0f);
 
-        Matrix3 rotX = Matrix3.rotateZ((float) (Math.PI / 2.0));
+        Matrix3 T = Matrix3.rotateZ((float) (Math.PI / 2.0));
 
-        Vector3 x2 = new Vector3(0.0f, 1.0f, 0.0f);
-        Vector3 y2 = new Vector3(-1.0f, 0.0f, 0.0f);
-        Vector3 z2 = new Vector3(0.0f, 0.0f, 1.0f);
+        Vector3 TxAnswer = new Vector3(0.0f, 1.0f, 0.0f);
+        Vector3 TyAnswer = new Vector3(-1.0f, 0.0f, 0.0f);
+        Vector3 TzAnswer = new Vector3(0.0f, 0.0f, 1.0f);
 
-        Vector3 Tx = rotX.multiply(x);
-        Vector3 Ty = rotX.multiply(y);
-        Vector3 Tz = rotX.multiply(z);
+        Vector3 Tx = T.multiply(x);
+        Vector3 Ty = T.multiply(y);
+        Vector3 Tz = T.multiply(z);
 
         for (int i = 0; i < Vector3.SIZE; i++) {
-            assertEquals(x2.v[i], Tx.v[i], DELTA);
-            assertEquals(y2.v[i], Ty.v[i], DELTA);
-            assertEquals(z2.v[i], Tz.v[i], DELTA);
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
         }
     }
 
@@ -338,5 +390,22 @@ public class Matrix3UnitTest {
         assertEquals(m.M(2,0), transpose.M(0,2), DELTA);
         assertEquals(m.M(2,1), transpose.M(1,2), DELTA);
         assertEquals(m.M(2,2), transpose.M(2,2), DELTA);
+    }
+
+    @Test
+    public void testScale() {
+        float sx = 2.0f;
+        float sy = 2.0f;
+        float sz = 2.0f;
+        Matrix3 m = Matrix3.scale(sx, sy, sz);
+        Vector3 v1 = new Vector3(1.0f);
+
+        Vector3 mv1 = m.multiply(v1);
+
+        Vector3 mv1Answer = new Vector3(sx,sy,sz);
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(mv1Answer.v[i], mv1.v[i], DELTA);
+        }
     }
 }

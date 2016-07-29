@@ -373,20 +373,20 @@ public class Matrix4UnitTest {
         Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
         Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
-        Matrix4 rotX = Matrix4.rotateX((float) (Math.PI / 2.0));
+        Matrix4 T = Matrix4.rotateX((float) (Math.PI / 2.0));
 
-        Vector4 x2 = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-        Vector4 y2 = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-        Vector4 z2 = new Vector4(0.0f, -1.0f, 0.0f, 1.0f);
+        Vector4 TxAnswer = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 TyAnswer = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+        Vector4 TzAnswer = new Vector4(0.0f, -1.0f, 0.0f, 1.0f);
 
-        Vector4 Tx = rotX.multiply(x);
-        Vector4 Ty = rotX.multiply(y);
-        Vector4 Tz = rotX.multiply(z);
+        Vector4 Tx = T.multiply(x);
+        Vector4 Ty = T.multiply(y);
+        Vector4 Tz = T.multiply(z);
 
-        for (int i = 0; i < Vector3.SIZE; i++) {
-            assertEquals(x2.v[i], Tx.v[i], DELTA);
-            assertEquals(y2.v[i], Ty.v[i], DELTA);
-            assertEquals(z2.v[i], Tz.v[i], DELTA);
+        for (int i = 0; i < Vector4.SIZE; i++) {
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
         }
     }
 
@@ -396,20 +396,20 @@ public class Matrix4UnitTest {
         Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
         Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
-        Matrix4 rotX = Matrix4.rotateY((float) (Math.PI / 2.0));
+        Matrix4 T = Matrix4.rotateY((float) (Math.PI / 2.0));
 
-        Vector4 x2 = new Vector4(0.0f, 0.0f, -1.0f, 1.0f);
-        Vector4 y2 = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-        Vector4 z2 = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 TxAnswer = new Vector4(0.0f, 0.0f, -1.0f, 1.0f);
+        Vector4 TyAnswer = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 TzAnswer = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 
-        Vector4 Tx = rotX.multiply(x);
-        Vector4 Ty = rotX.multiply(y);
-        Vector4 Tz = rotX.multiply(z);
+        Vector4 Tx = T.multiply(x);
+        Vector4 Ty = T.multiply(y);
+        Vector4 Tz = T.multiply(z);
 
-        for (int i = 0; i < Vector3.SIZE; i++) {
-            assertEquals(x2.v[i], Tx.v[i], DELTA);
-            assertEquals(y2.v[i], Ty.v[i], DELTA);
-            assertEquals(z2.v[i], Tz.v[i], DELTA);
+        for (int i = 0; i < Vector4.SIZE; i++) {
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
         }
     }
 
@@ -419,20 +419,163 @@ public class Matrix4UnitTest {
         Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
         Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
-        Matrix4 rotX = Matrix4.rotateZ((float) (Math.PI / 2.0));
+        Matrix4 T = Matrix4.rotateZ((float) (Math.PI / 2.0));
 
-        Vector4 x2 = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-        Vector4 y2 = new Vector4(-1.0f, 0.0f, 0.0f, 1.0f);
-        Vector4 z2 = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+        Vector4 TxAnswer = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 TyAnswer = new Vector4(-1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 TzAnswer = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
-        Vector4 Tx = rotX.multiply(x);
-        Vector4 Ty = rotX.multiply(y);
-        Vector4 Tz = rotX.multiply(z);
+        Vector4 Tx = T.multiply(x);
+        Vector4 Ty = T.multiply(y);
+        Vector4 Tz = T.multiply(z);
+
+        for (int i = 0; i < Vector4.SIZE; i++) {
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testRotate() {
+        Vector4 x = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Matrix4 Tx = Matrix4.rotate(new Vector3(1.0f, 0.0f, 0.0f), (float) (Math.PI / 2.0));
+        Matrix4 Ty = Matrix4.rotate(new Vector3(0.0f, 1.0f, 0.0f), (float) (Math.PI / 2.0));
+        Matrix4 Tz = Matrix4.rotate(new Vector3(0.0f, 0.0f, 1.0f), (float) (Math.PI / 2.0));
+
+        Vector4 TxxAnswer = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 TxyAnswer = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+        Vector4 TxzAnswer = new Vector4(0.0f, -1.0f, 0.0f, 1.0f);
+
+        Vector4 TyxAnswer = new Vector4(0.0f, 0.0f, -1.0f, 1.0f);
+        Vector4 TyyAnswer = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 TyzAnswer = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+
+        Vector4 TzxAnswer = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 TzyAnswer = new Vector4(-1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 TzzAnswer = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Vector4 Txx = Tx.multiply(x);
+        Vector4 Txy = Tx.multiply(y);
+        Vector4 Txz = Tx.multiply(z);
+
+        Vector4 Tyx = Ty.multiply(x);
+        Vector4 Tyy = Ty.multiply(y);
+        Vector4 Tyz = Ty.multiply(z);
+
+        Vector4 Tzx = Tz.multiply(x);
+        Vector4 Tzy = Tz.multiply(y);
+        Vector4 Tzz = Tz.multiply(z);
+
+        for (int i = 0; i < Vector4.SIZE; i++) {
+            assertEquals(TxxAnswer.v[i], Txx.v[i], DELTA);
+            assertEquals(TxyAnswer.v[i], Txy.v[i], DELTA);
+            assertEquals(TxzAnswer.v[i], Txz.v[i], DELTA);
+        }
+
+        for (int i = 0; i < Vector4.SIZE; i++) {
+            assertEquals(TyxAnswer.v[i], Tyx.v[i], DELTA);
+            assertEquals(TyyAnswer.v[i], Tyy.v[i], DELTA);
+            assertEquals(TyzAnswer.v[i], Tyz.v[i], DELTA);
+        }
+
+        for (int i = 0; i < Vector4.SIZE; i++) {
+            assertEquals(TzxAnswer.v[i], Tzx.v[i], DELTA);
+            assertEquals(TzyAnswer.v[i], Tzy.v[i], DELTA);
+            assertEquals(TzzAnswer.v[i], Tzz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testTranslateX() {
+        Vector4 x = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Matrix4 T = Matrix4.translate(1.0f, 0.0f, 0.0f);
+
+        Vector4 TxAnswer = new Vector4(2.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 TyAnswer = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 TzAnswer = new Vector4(1.0f, 0.0f, 1.0f, 1.0f);
+
+        Vector4 Tx = T.multiply(x);
+        Vector4 Ty = T.multiply(y);
+        Vector4 Tz = T.multiply(z);
 
         for (int i = 0; i < Vector3.SIZE; i++) {
-            assertEquals(x2.v[i], Tx.v[i], DELTA);
-            assertEquals(y2.v[i], Ty.v[i], DELTA);
-            assertEquals(z2.v[i], Tz.v[i], DELTA);
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testTranslateY() {
+        Vector4 x = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Matrix4 T = Matrix4.translate(0.0f, 1.0f, 0.0f);
+
+        Vector4 TxAnswer = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 TyAnswer = new Vector4(0.0f, 2.0f, 0.0f, 1.0f);
+        Vector4 TzAnswer = new Vector4(0.0f, 1.0f, 1.0f, 1.0f);
+
+        Vector4 Tx = T.multiply(x);
+        Vector4 Ty = T.multiply(y);
+        Vector4 Tz = T.multiply(z);
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testTranslateZ() {
+        Vector4 x = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+        Vector4 y = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+        Vector4 z = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+        Matrix4 T = Matrix4.translate(0.0f, 0.0f, 1.0f);
+
+        Vector4 TxAnswer = new Vector4(1.0f, 0.0f, 1.0f, 1.0f);
+        Vector4 TyAnswer = new Vector4(0.0f, 1.0f, 1.0f, 1.0f);
+        Vector4 TzAnswer = new Vector4(0.0f, 0.0f, 2.0f, 1.0f);
+
+        Vector4 Tx = T.multiply(x);
+        Vector4 Ty = T.multiply(y);
+        Vector4 Tz = T.multiply(z);
+
+        for (int i = 0; i < Vector3.SIZE; i++) {
+            assertEquals(TxAnswer.v[i], Tx.v[i], DELTA);
+            assertEquals(TyAnswer.v[i], Ty.v[i], DELTA);
+            assertEquals(TzAnswer.v[i], Tz.v[i], DELTA);
+        }
+    }
+
+    @Test
+    public void testScale() {
+        float sx = 2.0f;
+        float sy = 2.0f;
+        float sz = 2.0f;
+        Matrix4 m = Matrix4.scale(sx, sy, sz);
+        Vector4 v1 = new Vector4(1.0f, 1.0f);
+        Vector4 v2 = new Vector4(1.0f, 0.0f);
+
+        Vector4 mv1 = m.multiply(v1);
+        Vector4 mv2 = m.multiply(v2);
+
+        Vector4 mv1Answer = new Vector4(sx,sy,sz,1.0f);
+        Vector4 mv2Answer = new Vector4(sx,sy,sz,0.0f);
+
+        for (int i = 0; i < Vector4.SIZE; i++) {
+            assertEquals(mv1Answer.v[i], mv1.v[i], DELTA);
+            assertEquals(mv2Answer.v[i], mv2.v[i], DELTA);
         }
     }
 }
